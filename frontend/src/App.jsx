@@ -45,7 +45,38 @@ function App() {
     setEditingTodo(todo._id);
     setEditedText(todo.text);
   };
-  
+
+  const saveEdit = async (id) => {
+    
+    try {
+      const response = await axios.patch(`/api/todos/${id}`, { text: editedText });
+      setTodos(todos.map(todo => todo._id === id ? response.data : todo));
+      setEditingTodo(null);
+      setEditedText("");
+      
+    } catch (error) {
+      console.error('Error updating todo:', error);
+    }
+  }
+
+  const deleteTodo = async (id) => {
+    try {
+      await axios.delete(`/api/todos/${id}`);
+      setTodos(todos.filter(todo => todo._id !== id));
+    } catch (error) {
+      console.error('Error deleting todo:', error);
+    }
+  };
+
+  const toggleTodo= async (id) => {
+    try {
+      const todo = todos.find(todo => todo._id === id);
+      const response = await axios.patch(`/api/todos/${id}`, { completed: !todo.completed });
+      setTodos(todos.map(todo => todo._id === id ? response.data : todo));
+    } catch (error) {
+      console.error('Error toggling todo:', error);
+    }
+  };  
 
   return (
   <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
@@ -79,7 +110,7 @@ function App() {
                    
                   />
                   <div className=" flex gap-x-2">
-                  <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 cursor-pointer">
+                  <button onClick={()=> saveEdit(todo._id)} className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 cursor-pointer">
                   <MdOutlineDone />
                  </button>
                  <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 cursor-pointer" onClick={()=> setEditingTodo(null)}>
@@ -90,19 +121,19 @@ function App() {
                ) : (
                 <div>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-x-4">
-                      <button className={`h-6 w-6 border rounded-full flex items-center justify-center ${todo.completed ? "bg-green-500 border-green-500" : " border-gray-300 hover:border-blue-400"}`}>
+                    <div className="flex items-center gap-x-4 overflow-hidden">
+                      <button onClick={()=> toggleTodo(todo._id)} className={`flex-shrink-0 h-6 w-6 border rounded-full flex items-center justify-center ${todo.completed ? "bg-green-500 border-green-500" : " border-gray-300 hover:border-blue-400"}`}>
                         {todo.completed && <MdOutlineDone /> }
                       
                     </button>
-                    <span className=" text-gray-800 font-medium">{todo.text}</span>
+                    <span className=" text-gray-800 truncate font-medium">{todo.text}</span>
                     </div>
                     <div className=" flex gap-x-2">
                       <button className=" p-2 text-blue-500 hover:text-blue-700 rounded-lg hover:bg-blue-50 duration-200"
                       onClick={() => startEditing(todo)}>
                       <MdModeEditOutline />
                     </button>
-                    <button className=" p-2 text-red-500 hover:text-red-700 rounded-lg hover:bg-red-50 duration-200">
+                    <button onClick={()=> deleteTodo(todo._id)} className=" p-2 text-red-500 hover:text-red-700 rounded-lg hover:bg-red-50 duration-200">
                       <FaTrash />
                     </button>
                     </div>
