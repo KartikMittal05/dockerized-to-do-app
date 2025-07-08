@@ -14,11 +14,13 @@ function App() {
   const [editingTodo, setEditingTodo] = useState(null);
   const [editedText, setEditedText] = useState("");
 
+  const API_URL = import.meta.env.VITE_API_URL || "";
+
   const addTodo = async (e)=>{
     e.preventDefault();
     if (!newTodo.trim()) return; // Prevent adding empty tasks
     try {
-      const response = await axios.post("/api/todos", { text: newTodo });
+      const response = await axios.post(`${API_URL}/api/todos`, { text: newTodo });
       setTodos([...todos, response.data]);
       setNewTodo(""); // Clear input field after adding
        
@@ -29,7 +31,7 @@ function App() {
 
   const fetchTodos = async () => {
     try {
-      const response = await axios.get("/api/todos");
+      const response = await axios.get(`${API_URL}/api/todos`);
       console.log(response.data);
       setTodos(response.data);
     } catch (error) {
@@ -49,7 +51,7 @@ function App() {
   const saveEdit = async (id) => {
     
     try {
-      const response = await axios.patch(`/api/todos/${id}`, { text: editedText });
+      const response = await axios.patch(`${API_URL}/api/todos/${id}`, { text: editedText });
       setTodos(todos.map(todo => todo._id === id ? response.data : todo));
       setEditingTodo(null);
       setEditedText("");
@@ -61,7 +63,7 @@ function App() {
 
   const deleteTodo = async (id) => {
     try {
-      await axios.delete(`/api/todos/${id}`);
+      await axios.delete(`${API_URL}/api/todos/${id}`);
       setTodos(todos.filter(todo => todo._id !== id));
     } catch (error) {
       console.error('Error deleting todo:', error);
@@ -71,7 +73,7 @@ function App() {
   const toggleTodo= async (id) => {
     try {
       const todo = todos.find(todo => todo._id === id);
-      const response = await axios.patch(`/api/todos/${id}`, { completed: !todo.completed });
+      const response = await axios.patch(`${API_URL}/api/todos/${id}`, { completed: !todo.completed });
       setTodos(todos.map(todo => todo._id === id ? response.data : todo));
     } catch (error) {
       console.error('Error toggling todo:', error);
@@ -151,4 +153,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
