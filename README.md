@@ -69,10 +69,39 @@ to-do-app/
 ## 🖼️ Frontend Application – UI Screenshots
 
 🏠 **Home Page (Task List Overview)**
+<img width="1920" height="1080" alt="Screenshot (473)" src="https://github.com/user-attachments/assets/c5a72590-c71a-4655-948b-4ed410c21dce" />
+
 
 ➕ **Add New Task**
 
+Add ride bike task
+
+
+<img width="1920" height="1080" alt="Screenshot (474)" src="https://github.com/user-attachments/assets/3b3f6206-0622-4e01-8959-3dfbf14a108f" />
+
+
 ✅ **Mark as Completed / ❌ Delete Task**
+
+
+Mark complete to Buy Milk task
+
+
+<img width="1920" height="1080" alt="Screenshot (475)" src="https://github.com/user-attachments/assets/20961a7b-116d-4735-bb02-3d59604b520f" />
+
+
+Delete Buy Milk Task
+
+
+<img width="1920" height="1080" alt="Screenshot (476)" src="https://github.com/user-attachments/assets/56713877-ceeb-4f04-9577-2969ce37bd97" />
+
+
+
+🔄 **Update ride bike to ride cycle**
+
+
+<img width="1920" height="1080" alt="Screenshot (477)" src="https://github.com/user-attachments/assets/f85a1877-1967-448f-8859-c6da8e6f7eb2" />
+
+
 
 
 ---
