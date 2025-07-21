@@ -8,7 +8,6 @@ A professional, production-ready **To-Do List Application** built using the **ME
 ---
 
 ## 🚀 Live Demo
-- 🔗 [Canva Walkthrough Video](https://www.canva.com/design/xyz-demo-link)
 - 🌐 Frontend: _Pending Code Engine Deployment_
 - 🌐 Backend: _Pending Code Engine Deployment_
 
